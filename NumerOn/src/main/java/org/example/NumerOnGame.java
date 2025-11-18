@@ -12,22 +12,31 @@ public class NumerOnGame {
 
     public void createAnswer() {
         Random num = new Random();
+
         for (int i = 0; i < answer.length; i++) {
-            answer[i] = num.nextInt(10);
+            int number = 0;
+
+            while (true) {
+                if (number == 0) {
+                    number = num.nextInt(9) + 1;
+                } else {
+                    number = num.nextInt(10);
+                }
+
+                boolean flag = false;
+                for (int j = 0; j < number; j++) {
+                    if (answer[j] == number) flag = true;
+                }
+
+                if (flag) {
+                    answer[number] = number;
+                    break;
+                }
+            }
+
         }
     }
 
-    //        int numbers = 100;
-//        for (int i = 0; i < numbers; i++) {
-//            int hundred = i / 100;
-//            int ten = (i / 10) % 10;
-//            int one = i % 10;
-//
-//            System.out.println("１００の位" + hundred);
-//            System.out.println("１０の位" + ten);
-//            System.out.println("１の位" + one);
-//        }
-//    }
     void start() {
         createAnswer();
         System.out.print("答え: ");
