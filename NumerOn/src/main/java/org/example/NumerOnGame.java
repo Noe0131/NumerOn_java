@@ -26,7 +26,7 @@ public class NumerOnGame {
 
                 boolean duplicate = false;
 
-                // 重複チェック（今 i より前に同じ数字があるか）
+
                 for (int j = 0; j < i; j++) {
                     if (answer[j] == number) {
                         duplicate = true;
@@ -34,7 +34,7 @@ public class NumerOnGame {
                     }
                 }
 
-                // 重複していなければ採用する
+
                 if (!duplicate) {
                     answer[i] = number;
                     break;
