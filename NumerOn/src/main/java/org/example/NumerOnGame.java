@@ -14,26 +14,32 @@ public class NumerOnGame {
         Random num = new Random();
 
         for (int i = 0; i < answer.length; i++) {
-            int number = 0;
+            int number;
 
             while (true) {
-                if (number == 0) {
+                // 最初の桁だけ 1〜9、残りは 0〜9
+                if (i == 0) {
                     number = num.nextInt(9) + 1;
                 } else {
                     number = num.nextInt(10);
                 }
 
-                boolean flag = false;
-                for (int j = 0; j < number; j++) {
-                    if (answer[j] == number) flag = true;
+                boolean duplicate = false;
+
+                // 重複チェック（今 i より前に同じ数字があるか）
+                for (int j = 0; j < i; j++) {
+                    if (answer[j] == number) {
+                        duplicate = true;
+                        break;
+                    }
                 }
 
-                if (flag) {
-                    answer[number] = number;
+                // 重複していなければ採用する
+                if (!duplicate) {
+                    answer[i] = number;
                     break;
                 }
             }
-
         }
     }
 
