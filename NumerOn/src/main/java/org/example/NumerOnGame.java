@@ -23,13 +23,13 @@ public class NumerOnGame {
                     number = num.nextInt(10);
                 }
 
-                boolean flag = true;
-                for (int j = 0; j < i; j++) {
-                    if (answer[j] == number) flag = false;
+                boolean flag = false;
+                for (int j = 0; j < number; j++) {
+                    if (answer[j] == number) flag = true;
                 }
 
                 if (flag) {
-                    answer[i] = number;
+                    answer[number] = number;
                     break;
                 }
             }
