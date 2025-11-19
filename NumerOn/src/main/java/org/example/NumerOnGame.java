@@ -17,7 +17,7 @@ public class NumerOnGame {
             int number;
 
             while (true) {
-                // 最初の桁だけ 1〜9、残りは 0〜9
+
                 if (i == 0) {
                     number = num.nextInt(9) + 1;
                 } else {
