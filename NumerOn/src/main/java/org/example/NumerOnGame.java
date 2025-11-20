@@ -8,6 +8,8 @@ public class NumerOnGame {
     int _maxTry;
     int[] answer = new int[3];
     Scanner scan = new Scanner(System.in);
+    int[] input_user;
+
 
     public NumerOnGame(int _maxTry) {
         this._maxTry = _maxTry;
@@ -54,29 +56,46 @@ public class NumerOnGame {
         int Tens_place = (input / 10) % 10;
         int Ones_place = input % 10;
 
-        int[] input_user;
         input_user = new int[3];
 
         input_user[0] = Hundreds_place;
         input_user[1] = Tens_place;
         input_user[2] = Ones_place;
-
-        System.out.println(Arrays.toString(input_user));
-
     }
 
     void checkEatBite(int[] input_user) {
+        int eat = 0;
+        int blte = 0;
 
+        //eat
+        for (int i = 0; i < 3; i++) {
+            if (input_user[i] == answer[i]) {
+                eat++;
+                System.out.println("EAT");
+            }
+        }
+
+        //blte
+        for (int i = 0; i < 3; i++) {
+            if (input_user[i] != answer[i]) {
+
+                for (int j = 0; j < 3; j++) {
+                    if ((input_user[i] == answer[j]) && (i != j)) {
+                        blte++;
+                        System.out.println("Blte");
+                    }
+                }
+            }
+        }
     }
 
     void start() {
         createAnswer();
         splitNumber();
-        System.out.print("答え: ");
+        checkEatBite(input_user);
         for (int n : answer) {
             System.out.print(n + "");
         }
-        System.out.println();
         scan.close();
     }
 }
