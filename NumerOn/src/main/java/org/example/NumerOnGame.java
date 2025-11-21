@@ -1,5 +1,6 @@
 package org.example;
 
+import java.awt.*;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
@@ -71,7 +72,6 @@ public class NumerOnGame {
         for (int i = 0; i < 3; i++) {
             if (input_user[i] == answer[i]) {
                 eat++;
-                System.out.println("EAT");
             }
         }
 
@@ -82,20 +82,36 @@ public class NumerOnGame {
                 for (int j = 0; j < 3; j++) {
                     if ((input_user[i] == answer[j]) && (i != j)) {
                         blte++;
-                        System.out.println("Blte");
                     }
                 }
             }
         }
+        System.out.println(eat + "EAT-" + blte + "BITE");
     }
 
     void start() {
         createAnswer();
-        splitNumber();
-        checkEatBite(input_user);
-        for (int n : answer) {
-            System.out.print(n + "");
+        _maxTry = 10;
+        for (int i = _maxTry; i > 0; i--) {
+            System.out.println("あと" + i + "です。");
+            splitNumber();
+            checkEatBite(input_user);
         }
+        for (int n : answer) {
+            System.out.print("答え" + Arrays.toString(answer));
+        }
+
+
+//        String str = scan.next();
+//
+//        if (str == "g") {
+//            System.out.println("Give up !!");
+//            System.out.println("あなたの負けです");
+//            System.exit(0);
+//        }
+
+
         scan.close();
+
     }
 }
