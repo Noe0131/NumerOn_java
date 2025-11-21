@@ -1,13 +1,12 @@
 package org.example;
 
-import java.awt.*;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
 public class NumerOnGame {
+    public static final int DIGITS = 3;
     int _maxTry;
-    int[] answer = new int[3];
+    int[] answer = new int[DIGITS];
     Scanner scan = new Scanner(System.in);
     int[] input_user;
 
@@ -19,28 +18,18 @@ public class NumerOnGame {
     public void createAnswer() {
         Random random = new Random();
 
-        for (int i = 0; i < answer.length; i++) {
+        for (int i = 0; i < DIGITS; i++) {
             int number;
 
             while (true) {
-
-                if (i == 0) {
-                    number = random.nextInt(9) + 1;
-                } else {
-                    number = random.nextInt(10);
-                }
-
+                number = (i == 0) ? random.nextInt(9) + 1: random.nextInt(10);
                 boolean duplicate = false;
-
-
                 for (int j = 0; j < i; j++) {
                     if (answer[j] == number) {
                         duplicate = true;
                         break;
                     }
                 }
-
-
                 if (!duplicate) {
                     answer[i] = number;
                     break;
@@ -62,6 +51,30 @@ public class NumerOnGame {
         input_user[0] = Hundreds_place;
         input_user[1] = Tens_place;
         input_user[2] = Ones_place;
+
+
+    }
+
+    public  boolean readUserInput() {
+        while (true) {
+            System.out.print("3桁の数字を入力（gでギブアップ）: ");
+
+            String s = scan.next();
+
+            if (s.equals("g")) {
+                return  false;
+            }
+
+            if (s.matches("\\d{3}")) {
+                input_user = new int[3];
+
+                input_user[0] = s.charAt(0) - '0';
+                input_user[1] = s.charAt(1) - '0';
+                input_user[2] = s.charAt(2) - '0';
+                return true;
+            }
+        }
+
     }
 
     void checkEatBite(int[] input_user) {
@@ -94,24 +107,25 @@ public class NumerOnGame {
         _maxTry = 10;
         for (int i = _maxTry; i > 0; i--) {
             System.out.println("あと" + i + "です。");
-            splitNumber();
+            if (!readUserInput()) {
+                System.out.println("Give up !!");
+                System.out.println("あなたの負けです");
+                break;
+            }
             checkEatBite(input_user);
+
+            if (input_user[0] == answer[0] && input_user[1] == answer[1] && input_user[2] == answer[2]) {
+                System.out.println("あなたの勝ちです");
+                break;
+            }
         }
-        for (int n : answer) {
-            System.out.print("答え" + Arrays.toString(answer));
-        }
-
-
-//        String str = scan.next();
-//
-//        if (str == "g") {
-//            System.out.println("Give up !!");
-//            System.out.println("あなたの負けです");
-//            System.exit(0);
-//        }
-
 
         scan.close();
+        System.out.print("答え");
+        for (int n : answer) {
+
+            System.out.print(n + " ");
+        }
 
     }
 }
